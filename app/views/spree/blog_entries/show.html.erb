@@ -14,7 +14,7 @@
     <h1><%= @blog_entry.title %></h1>
 
     <div class="blog_entry_body">
-      <%= image_tag @blog_entry.blog_entry_image.attachment.url('normal') if @blog_entry.blog_entry_image %>
+      <%= image_tag @blog_entry.blog_entry_image.attachment.url('large') if @blog_entry.blog_entry_image %>
       <%= simple_format @blog_entry.body %>
     </div>
 
