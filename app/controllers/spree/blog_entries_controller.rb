@@ -6,6 +6,7 @@ class Spree::BlogEntriesController < Spree::StoreController
 
   def index
     @blog_entries = Spree::BlogEntry.visible.page(@pagination_page).per(@pagination_per_page)
+    fresh_when last_modified: @blog_entries.collect{ |p| p.updated_at}.flatten.max, etag: @blog_entries
   end
 
   def show
@@ -15,6 +16,7 @@ class Spree::BlogEntriesController < Spree::StoreController
       @blog_entry = Spree::BlogEntry.visible.find_by_permalink!(params[:slug])
     end
     @title = @blog_entry.title
+    fresh_when last_modified: @blog_entry.updated_at, etag: @blog_entry
   end
 
   def tag
