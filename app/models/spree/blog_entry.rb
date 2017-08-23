@@ -29,7 +29,7 @@ class Spree::BlogEntry < ActiveRecord::Base
   end
 
   def self.by_date(date, period = nil)
-    if date.is_a?(Hash)
+    if date.is_a?(Hash) or date.is_a?(ActionController::Parameters)
       keys = [:day, :month, :year].select {|key| date.include?(key) }
       period = keys.first.to_s
       date = DateTime.new(*keys.reverse.map {|key| date[key].to_i })
